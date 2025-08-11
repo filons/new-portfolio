@@ -610,13 +610,8 @@ header{
 .burger.is-active span:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
-/* Garder 3 barres horizontales même quand le menu est ouvert */
-.burger.is-active span:nth-child(1),
-.burger.is-active span:nth-child(2),
-.burger.is-active span:nth-child(3) {
-    transform: none !important;
-    opacity: 1 !important;
-}
+/* Animation burger en 3 barres (reste horizontales) */
+.burger.is-active span { opacity: 1; }
 body.no-scroll { overflow: hidden; }
 
 @media (max-width: 900px) {
@@ -648,3 +643,35 @@ footer { margin-top: auto; }
 /* Organisation interne du footer pour coller le copyright en bas */
 footer { display: flex !important; flex-direction: column !important; padding-bottom: 0 !important; }
 .footer-copyright { margin-top: auto !important; }
+
+/* Animation d’ouverture du menu (overlay) */
+@keyframes slideDownOverlay {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animation des barres du burger (reste en 3 barres) */
+@keyframes barPulse {
+    0% { transform: scaleX(1); }
+    50% { transform: scaleX(0.85); }
+    100% { transform: scaleX(1); }
+}
+.burger.is-active span { animation: barPulse 280ms ease; }
+.burger.is-active span:nth-child(2) { animation-delay: 40ms; }
+.burger.is-active span:nth-child(3) { animation-delay: 80ms; }
+
+@media (max-width: 900px) {
+    /* Overlay du menu: au-dessus du contenu, sous le header */
+    .navbar.open {
+        position: fixed;
+        top: var(--navbar-top, 60px);
+        left: 0;
+        right: 0;
+        z-index: 999;
+        animation: slideDownOverlay 220ms ease both;
+    }
+    .navbar.open nav ul {
+        margin: 0;
+        border-radius: 0 0 12px 12px;
+    }
+}

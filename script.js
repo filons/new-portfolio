@@ -55,12 +55,29 @@ document.addEventListener("DOMContentLoaded",Writer);
 document.addEventListener('DOMContentLoaded', function () {
     const burgerButton = document.querySelector('.burger');
     const navbar = document.querySelector('.navbar');
+    const header = document.querySelector('header');
+
+    function updateNavbarTop() {
+        if (!header) return;
+        const headerRect = header.getBoundingClientRect();
+        const headerHeight = headerRect.height;
+        document.documentElement.style.setProperty('--navbar-top', headerHeight + 'px');
+    }
+
     if (burgerButton && navbar) {
+        updateNavbarTop();
+        window.addEventListener('resize', updateNavbarTop);
+        window.addEventListener('scroll', updateNavbarTop, { passive: true });
+
         burgerButton.addEventListener('click', function () {
             const isOpen = navbar.classList.toggle('open');
             burgerButton.classList.toggle('is-active', isOpen);
             burgerButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             document.body.classList.toggle('no-scroll', isOpen);
+            if (isOpen) {
+                navbar.classList.add('anim');
+                setTimeout(() => navbar.classList.remove('anim'), 300);
+            }
         });
         navbar.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', function () {
