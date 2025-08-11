@@ -1,3 +1,9 @@
+@media (max-width: 900px) {
+    #writer {
+        font-size: 1.1rem;
+        padding-right: 2px;
+    }
+}
 .footer-email {
     margin-top: 10px;
     margin-bottom: 0;
@@ -224,6 +230,7 @@ header{
     box-shadow: 0 2px 16px 0 rgba(0,0,0,0.4);
     width: 100%;
 }
+
 .navbar nav ul {
     display: flex;
 }
@@ -244,11 +251,111 @@ header{
 /*acceuil*/
 #acceuil{
     display: flex;
+    flex-direction: row;
     padding: 30px 30px;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
     gap: 40px;
+}
+
+@media (max-width: 900px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 4vw;
+        gap: 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    .burger {
+        margin-left: auto;
+        margin-right: 0;
+        align-self: flex-start;
+    }
+    #acceuil {
+        flex-direction: column;
+        gap: 18px;
+        padding: 18px 4vw;
+        margin-top: 10px;
+    }
+    .text-acc {
+        order: 1;
+    }
+    .img-acc {
+        order: 2;
+    }
+    .text-acc {
+        min-width: unset;
+        max-width: 100%;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        font-size: 1.1rem;
+        padding: 0;
+    }
+    #writer {
+        font-size: 1.3rem;
+        padding-right: 4px;
+    }
+    .img-acc {
+        min-width: 120px;
+        max-width: 220px;
+        width: 60vw;
+        margin: 0 auto;
+    }
+    .img-acc img {
+        width: 100%;
+        max-width: 180px;
+        height: auto;
+    }
+    header {
+        flex-direction: column;
+        padding: 16px 4vw;
+        gap: 10px;
+    }
+    .navbar nav ul {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    .navbar nav ul li {
+        margin: 0;
+    }
+    #skills, #services, .grille-projets {
+        padding: 18px 2vw;
+        max-width: 100vw;
+    }
+    .grille-services {
+        flex-direction: column !important;
+        display: flex !important;
+        gap: 12px !important;
+        align-items: center;
+    }
+    .skills-langages, .skills-tools {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        display: flex !important;
+        gap: 12px !important;
+        justify-content: center;
+        align-items: center;
+    }
+    .grille-projets {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+    .item, .item-projets p {
+        font-size: 1rem;
+        padding: 12px 8px;
+    }
+    .item-projets img {
+        width: 100%;
+        max-width: 180px;
+        height: auto;
+    }
 }
 #writer{
         font-family: 'Fira Mono', 'Consolas', monospace;
@@ -475,3 +582,69 @@ header{
     transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
     transform: scale(1.05);
 }
+/* --- Burger Menu --- */
+.burger {
+    display: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    line-height: 0;
+}
+.burger span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: #00eaff;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.burger span + span { margin-top: 5px; }
+.burger.is-active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.burger.is-active span:nth-child(2) {
+    opacity: 0;
+}
+.burger.is-active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+/* Garder 3 barres horizontales même quand le menu est ouvert */
+.burger.is-active span:nth-child(1),
+.burger.is-active span:nth-child(2),
+.burger.is-active span:nth-child(3) {
+    transform: none !important;
+    opacity: 1 !important;
+}
+body.no-scroll { overflow: hidden; }
+
+@media (max-width: 900px) {
+    header { flex-direction: row !important; justify-content: space-between; align-items: center; gap: 10px; }
+    .burger { display: inline-flex; align-items: center; justify-content: center; }
+    .navbar { display: none; width: 100%; }
+    .navbar.open { display: block; }
+    .navbar nav ul { padding: 12px 0; background: rgba(15,32,39,0.98); border-radius: 12px; box-shadow: 0 8px 24px 0 #00eaff22; }
+}
+
+/* Footer toujours en fin de page (sans fixed) */
+body { display: flex; flex-direction: column; min-height: 100vh; }
+footer { margin-top: auto; }
+
+/* Mettre la barre copyright dans le flux normal */
+.footer-copyright {
+    position: static !important;
+    width: 100% !important;
+    left: auto; right: auto; bottom: auto;
+}
+
+@media (max-width: 900px) {
+    .footer-copyright {
+        position: static !important;
+        width: 100% !important;
+    }
+}
+
+/* Organisation interne du footer pour coller le copyright en bas */
+footer { display: flex !important; flex-direction: column !important; padding-bottom: 0 !important; }
+.footer-copyright { margin-top: auto !important; }
