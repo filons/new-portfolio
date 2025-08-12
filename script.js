@@ -224,5 +224,101 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     console.log('=== FIN DE L\'INITIALISATION ===');
+    
+    // === GESTION DU FORMULAIRE DE CONTACT ===
+    const contactForm = document.querySelector('.footer-contact-form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupération des données du formulaire
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            // Validation basique
+            if (!name || !email || !message) {
+                showNotification('Veuillez remplir tous les champs', 'error');
+                return;
+            }
+            
+            // Validation email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification('Veuillez entrer une adresse email valide', 'error');
+                return;
+            }
+            
+            // Afficher un message de chargement
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Envoi en cours...';
+            submitBtn.disabled = true;
+            
+            // Envoyer le formulaire
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showNotification('Message envoyé avec succès !', 'success');
+                    this.reset(); // Vider le formulaire
+                } else {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                showNotification('Erreur lors de l\'envoi du message. Veuillez réessayer.', 'error');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
+    
+    // Fonction pour afficher les notifications
+    function showNotification(message, type = 'info') {
+        // Supprimer les notifications existantes
+        const existingNotifications = document.querySelectorAll('.notification');
+        existingNotifications.forEach(notif => notif.remove());
+        
+        // Créer la notification
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <span class="notification-message">${message}</span>
+                <button class="notification-close">&times;</button>
+            </div>
+        `;
+        
+        // Ajouter au body
+        document.body.appendChild(notification);
+        
+        // Animation d'entrée
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 100);
+        
+        // Fermer automatiquement après 5 secondes
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 5000);
+        
+        // Fermer manuellement
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        });
+    }
 });
 
