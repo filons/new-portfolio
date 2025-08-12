@@ -431,6 +431,7 @@ header{
     box-shadow: 0 4px 32px 0 #00eaff22;
     margin: 40px auto 40px auto;
     max-width: 1100px;
+    width: 100%;
 }
 #skills h1{
     color: #00eaff;
@@ -464,13 +465,13 @@ header{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 50px;
 }
 .skills-tools{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 50px;
     margin-top: 30px;
 }
 /*services*/
