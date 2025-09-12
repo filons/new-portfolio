@@ -826,6 +826,33 @@ header{
     margin-bottom: 15px;
 }
 
+.projet-github {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: #0b1220;
+    border: 1px solid #1f2937;
+    transition: all 0.2s ease;
+}
+
+.projet-github:hover {
+    background: #111827;
+    color: #93c5fd;
+    border-color: #3b82f6;
+}
+
+.projet-github svg {
+    width: 20px;
+    height: 20px;
+}
+
 .tech-tag {
     background: #0b1220;
     color: #cbd5e1;
