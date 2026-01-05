@@ -886,21 +886,30 @@ header{
     border: 1px solid #1f2937;
 }
 
-/* Responsive pour les projets */
-@media (max-width: 768px) {
-    .grille-projets {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 30px 20px;
-    }
-    
-    .projet-content {
-        padding: 20px;
-    }
-    
-    .projet-content h3 {
-        font-size: 1.1rem;
-    }
+.sketchfab-card {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sketchfab-embed-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sketchfab-embed-wrapper iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+}
+
+.tech-tag a {
+    color: inherit;
+    text-decoration: none;
 }
 
 /* Styles pour les filtres des projets */
