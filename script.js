@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const phrases=["Bonjour je suis Eric Ketchadji.",
-    "Étudiant à l'école Nationale Superieur Polytechnique de Maroua.",
+    "Étudiant à l'école Nationale Superieure Polytechnique de Maroua.",
     "développeur passionné, créatif et curieux,",
     "toujours prêt à relever de nouveaux défis numériques."
 ];
